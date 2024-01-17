@@ -1,0 +1,186 @@
+@import url('https://fonts.googleapis.com/css2?family=Chakra+Petch&family=Roboto+Mono:wght@300&display=swap');
+
+body {
+    font-family: 'Chakra Petch', sans-serif;
+    background-image: url(./fotos/fondo.png);
+    background-position: center;
+	background-size: cover;
+    background-attachment: fixed;
+}
+
+#seleccionar-mascota {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.titulo {
+    color:white;
+    font-size: 40px;
+}
+
+.subtitulo {
+    color: white;
+    font-size: 32px;
+}
+
+.tarjetas, .tarjetas-ataques {
+    display: flex;
+    gap: 30px;
+
+}
+
+.tarjeta-de-mokepon {
+    width: 200px;
+    height: 130px;
+    background-color: #756AB6;
+    padding: 10px;
+    box-sizing: border-box;
+    border-radius: 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: white;
+    font-size: 28px;
+}
+
+.tarjeta-de-mokepon img {
+    width: 90px;
+}
+
+#boton-mascota {
+    width: 180px;
+    height: 50px;
+    border-radius: 20px;
+    background-color: transparent;
+    border: 2px solid black;
+    color: white;
+    font-family: 'Roboto Mono', monospace;
+    font-size: 20px;
+    margin-top: 40px;
+}
+
+input {
+    display: none;
+}
+
+input:hover + label {
+    background-color: #E0AED0;
+}
+
+input:checked + label {
+    background-color: #E0AED0;
+}
+
+.nombres {
+    font-size: 30px;
+    color: black
+}
+.combate-jugador, .combate-enemigo {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    border: 2px solid black;
+    border-radius: 20px;
+    padding: 10px;
+}
+
+.imagenes-combate {
+    display: flex;
+}
+
+.imagenes-combate img {
+    width: 140px;
+}
+
+#seleccionar-ataque {
+    flex-direction: column;
+    align-items: center;
+}
+
+.boton-ataque {
+    background-color: #756AB6;
+    padding: 10px;
+    box-sizing: border-box;
+    border-radius: 20px;
+    border-color: transparent;
+    width: 230px;
+    height: 100px;
+    color: white;
+    font-size: 28px;
+    font-family: 'Chakra Petch', sans-serif;
+}
+
+.boton-ataque:hover {
+    background-color: #E0AED0;
+}
+
+#mensajes {
+    width: 280px;
+    font-size: 20px;
+    color: white;
+    background-color: transparent;
+    border: 2px solid black;
+    padding: 10px;
+    margin-top: 20px;
+    border-radius: 20px;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+}
+
+#boton-reiniciar {
+    width: 180px;
+    height: 50px;
+    border-radius: 20px;
+    background-color: transparent;
+    border: 2px solid white;
+    color: white;
+    font-family: 'Roboto Mono', monospace;
+    font-size: 20px;
+}
+
+.ataques {
+    display: grid;
+    grid-template-columns: 150px 150px;
+    gap: 50px;
+    margin-top: 20px;
+}
+
+#vidas-jugador, #vidas-enemigo {
+    font-size: 20px;
+    margin-bottom: 0px;
+}
+
+.ataques-jugador {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    color: white;
+    box-sizing: border-box;
+    border: 2px solid black;
+    border-radius: 20px;
+    background-color: transparent;
+}
+
+.ataques-enemigo {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    color: white;
+    box-sizing: border-box;
+    border: 2px solid black;
+    border-radius: 20px;
+    background-color: transparent;
+}
+
+@media (max-width: 360px) {
+    .tarjetas, .tarjetas-ataques {
+        flex-direction: column;
+    }
+
+    .boton-ataque:hover {
+        background-color: #AC87C5;
+    }
+}
