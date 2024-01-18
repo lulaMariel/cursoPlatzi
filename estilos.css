@@ -105,8 +105,8 @@ input:checked + label {
     box-sizing: border-box;
     border-radius: 20px;
     border-color: transparent;
-    width: 230px;
-    height: 100px;
+    width: 100px;
+    height: 70px;
     color: white;
     font-size: 28px;
     font-family: 'Chakra Petch', sans-serif;
