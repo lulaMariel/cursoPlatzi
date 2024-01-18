@@ -72,7 +72,7 @@ Rex.ataques.push(
     { nombre: "🔥", id: "boton-fuego" },
 )
 
-mokepones.push(woody,buzz,rex)
+mokepones.push(Woody,Buzz,Rex)
 
 function iniciarJuego() {
     seccionSelecionarAtaque.style.display = "none"
