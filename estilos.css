@@ -31,6 +31,24 @@ body {
 
 }
 
+.tarjeta-de-mokepon {
+    width: 200px;
+    height: 130px;
+    background-color: #756AB6;
+    padding: 10px;
+    box-sizing: border-box;
+    border-radius: 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: white;
+    font-size: 28px;
+}
+
+.tarjeta-de-mokepon img {
+    width: 90px;
+}
+
 #boton-mascota {
     width: 180px;
     height: 50px;
