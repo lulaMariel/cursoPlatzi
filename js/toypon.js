@@ -165,14 +165,17 @@ function secuenciaAtaques() {
                 ataqueJugador.push("🔥")
                 console.log(ataqueJugador)
                 boton.style.background = "#3C0753"
+                boton.disabled = true
             } else if(e.target.textContent == "💧") {
                 ataqueJugador.push("💧")
                 console.log(ataqueJugador)
                 boton.style.background = "#3C0753"
+                boton.disabled = true
             } else {
                 ataqueJugador.push("🌱")
                 console.log(ataqueJugador)
                 boton.style.background = "#3C0753"
+                boton.disabled = true
             }
             ataqueAleatorioEnemigo()
         })
@@ -258,10 +261,6 @@ function crearMensaje(resultado) {
 
 function crearMensajeFinal(resultadoFinal) {
     seccionMensajes.innerHTML = resultadoFinal
-    
-    botonFuego.disabled = true
-    botonAgua.disabled = true
-    botonTierra.disabled = true
     
     seccionReiniciar.style.display = "block"
 }
