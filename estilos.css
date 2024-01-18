@@ -175,7 +175,7 @@ input:checked + label {
     background-color: transparent;
 }
 
-@media (max-width: 360px) {
+@media (max-width: 500px) {
     .tarjetas, .tarjetas-ataques {
         flex-direction: column;
     }
