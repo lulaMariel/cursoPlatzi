@@ -183,4 +183,12 @@ input:checked + label {
     .boton-ataque:hover {
         background-color: #AC87C5;
     }
+
+    .imagenes-combate {
+        width: 350px;
+    }
+    
+    .imagenes-combate img {
+        width: 100px;
+    }
 }
