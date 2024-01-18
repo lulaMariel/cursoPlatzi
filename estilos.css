@@ -186,6 +186,11 @@ input:checked + label {
 
     .imagenes-combate {
         width: 350px;
+        justify-content: center;
+    }
+
+    .nombres {
+        font-size: 23px;
     }
     
     .imagenes-combate img {
