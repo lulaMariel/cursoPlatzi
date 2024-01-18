@@ -33,6 +33,8 @@ let botonFuego
 let botonAgua
 let botonTierra
 let botones = []
+let indexAtaqueJugador
+let indexAtaqueEnemigo
 let vidasJugador = 3
 let vidasEnemigo = 3
 
@@ -158,15 +160,15 @@ function secuenciaAtaques() {
     botones.forEach((boton) => {
         boton.addEventListener("click", (e) => {
             if (e.target.textContent == "🔥") {
-                ataqueJugador.push("FUEGO")
+                ataqueJugador.push("🔥")
                 console.log(ataqueJugador)
                 boton.style.background = "#3C0753"
             } else if(e.target.textContent == "💧") {
-                ataqueJugador.push("AGUA")
+                ataqueJugador.push("💧")
                 console.log(ataqueJugador)
                 boton.style.background = "#3C0753"
             } else {
-                ataqueJugador.push("TIERRA")
+                ataqueJugador.push("🌱")
                 console.log(ataqueJugador)
                 boton.style.background = "#3C0753"
             }
@@ -189,17 +191,36 @@ function ataqueAleatorioEnemigo() {
     let ataqueAleatorio = aleatorio(0, ataquesToyponEnemigo.length - 1)
 
     if(ataqueAleatorio == 0 || ataqueAleatorio == 1) {
-        ataqueEnemigo.push("FUEGO")
+        ataqueEnemigo.push("🔥")
     } else if(ataqueAleatorio == 3 || ataqueAleatorio == 4) {
-        ataqueEnemigo.push("AGUA")
+        ataqueEnemigo.push("💧")
     } else {
-        ataqueEnemigo.push("TIERRA")
+        ataqueEnemigo.push("🌱")
     }
     console.log(ataqueEnemigo)
-    combate()
+    iniciarCombate()
+}
+
+function iniciarCombate() {
+    if (ataqueJugador.length == 5) {
+        combate()
+    }
+}
+
+function indexAmbosJugadores(jugador, enemigo) {
+    indexAtaqueJugador = ataqueJugador[jugador]
+    indexAtaqueEnemigo = ataqueEnemigo[enemigo]
 }
 
 function combate() {
+    for (let index = 0; index < ataqueJugador.length; index++) {
+        if(ataqueJugador[index] == ataqueEnemigo[index]) {
+            indexAmbosJugadores(index, index)
+            crearMensaje("Empate🤝")
+        }
+        
+    }
+
     if(ataqueEnemigo == ataqueJugador) {
         crearMensaje("Empate🤝")
     } else if((ataqueJugador == "🔥" && ataqueEnemigo == "🌱") || (ataqueJugador == "💧" && ataqueEnemigo == "🔥") || (ataqueJugador == "🌱" && ataqueEnemigo == "💧")) {
@@ -228,8 +249,8 @@ function crearMensaje(resultado) {
     let nuevoAtaqueDelEnemigo = document.createElement("p")
 
     seccionMensajes.innerHTML = resultado
-    nuevoAtaqueDelJugador.innerHTML = ataqueJugador
-    nuevoAtaqueDelEnemigo.innerHTML = ataqueEnemigo
+    nuevoAtaqueDelJugador.innerHTML = indexAtaqueJugador
+    nuevoAtaqueDelEnemigo.innerHTML = indexAtaqueEnemigo
 
     ataquesDelJugador.appendChild(nuevoAtaqueDelJugador)
     ataquesDelEnemigo.appendChild(nuevoAtaqueDelEnemigo)
