@@ -79,12 +79,12 @@ function iniciarJuego() {
 
     seccionReiniciar.style.display = "none"
 
-    toypones.forEach((mokepon) => {
+    toypones.forEach((toypon) => {
         opcionDeToypones = `
-        <input type="radio" name="mascota" id=${mokepon.nombre} />
-        <label class="tarjeta-de-mokepon" for=${mokepon.nombre}>
-            <p>${mokepon.nombre}</p>
-            <img src=${mokepon.foto} alt=${mokepon.nombre}>
+        <input type="radio" name="mascota" id=${toypon.nombre} />
+        <label class="tarjeta-de-toypon" for=${toypon.nombre}>
+            <p>${toypon.nombre}</p>
+            <img src=${toypon.foto} alt=${toypon.nombre}>
         </label>
         `
     contenedorTarjetas.innerHTML += opcionDeToypones
