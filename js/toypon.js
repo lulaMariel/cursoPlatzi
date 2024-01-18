@@ -35,6 +35,8 @@ let botonTierra
 let botones = []
 let indexAtaqueJugador
 let indexAtaqueEnemigo
+let victoriasJugador = 0
+let victoriasEnemigo = 0
 let vidasJugador = 3
 let vidasEnemigo = 3
 
@@ -217,29 +219,27 @@ function combate() {
         if(ataqueJugador[index] == ataqueEnemigo[index]) {
             indexAmbosJugadores(index, index)
             crearMensaje("Empate🤝")
-        }
-        
+        } else if((ataqueJugador[index] == "🔥" && ataqueEnemigo[index] == "🌱") || (ataqueJugador[index] == "💧" && ataqueEnemigo[index] == "🔥") || (ataqueJugador[index] == "🌱" && ataqueEnemigo[index] == "💧")) {
+            indexAmbosJugadores(index, index)
+            crearMensaje("Ganaste🥇")
+            victoriasJugador++
+            spanVidasJugador.innerHTML = victoriasJugador
+        } else {
+            indexAmbosJugadores(index, index)
+            crearMensaje("Perdiste👎")
+            victoriasEnemigo++
+            spanVidasEnemigo.innerHTML = victoriasEnemigo
     }
-
-    if(ataqueEnemigo == ataqueJugador) {
-        crearMensaje("Empate🤝")
-    } else if((ataqueJugador == "🔥" && ataqueEnemigo == "🌱") || (ataqueJugador == "💧" && ataqueEnemigo == "🔥") || (ataqueJugador == "🌱" && ataqueEnemigo == "💧")) {
-        crearMensaje("Ganaste🥇")
-        vidasEnemigo --
-        spanVidasEnemigo.innerHTML = vidasEnemigo
-    } else {
-        crearMensaje("Perdiste👎")
-        vidasJugador --
-        spanVidasJugador.innerHTML = vidasJugador
-    }
-
-    revisarVidas()
+}
+    revisarVictorias()
 }
 
-function revisarVidas() {
-    if(vidasEnemigo == 0) {
+function revisarVictorias() {
+    if(victoriasJugador == victoriasEnemigo) {
+        crearMensajeFinal("Empate! Jugá la revancha")
+    } else if(victoriasJugador > victoriasEnemigo) {
         crearMensajeFinal("Lo lograste! Felicidades🥇")
-    } else if(vidasJugador == 0) {
+    } else {
         crearMensajeFinal("Lo siento, perdiste😥. Pero aún podes jugar la revancha!")
     }
 }
