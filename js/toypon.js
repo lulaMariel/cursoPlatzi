@@ -42,13 +42,13 @@ class Mokepones {
 
 }
 
-let Woody = new Mokepones("Woody", "fotos/woody.png", 5)
+let woody = new Mokepones("Woody", "fotos/woody.png", 5)
 
-let Buzz = new Mokepones("Buzz", "fotos/buzz.png", 5)
+let buzz = new Mokepones("Buzz", "fotos/buzz.png", 5)
 
-let Rex = new Mokepones("Rex", "fotos/rex.png", 5)
+let rex = new Mokepones("Rex", "fotos/rex.png", 5)
 
-Woody.ataques.push(
+woody.ataques.push(
     { nombre: "💧", id: "boton-agua" },
     { nombre: "💧", id: "boton-agua" },
     { nombre: "💧", id: "boton-agua" },
@@ -56,7 +56,7 @@ Woody.ataques.push(
     { nombre: "🌱", id: "boton-tierra"},
 )
 
-Buzz.ataques.push(
+buzz.ataques.push(
     { nombre: "🔥", id: "boton-fuego" },
     { nombre: "🔥", id: "boton-fuego" },
     { nombre: "🔥", id: "boton-fuego" },
@@ -64,7 +64,7 @@ Buzz.ataques.push(
     { nombre: "💧", id: "boton-agua"},
 )
 
-Rex.ataques.push(
+rex.ataques.push(
     { nombre: "🌱", id: "boton-tierra"},
     { nombre: "🌱", id: "boton-tierra"},
     { nombre: "🌱", id: "boton-tierra"},
@@ -72,7 +72,7 @@ Rex.ataques.push(
     { nombre: "🔥", id: "boton-fuego" },
 )
 
-mokepones.push(Woody,Buzz,Rex)
+mokepones.push(woody,buzz,rex)
 
 function iniciarJuego() {
     seccionSelecionarAtaque.style.display = "none"
