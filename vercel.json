@@ -3,7 +3,7 @@
   "builds": [
     { "src": "index.html", "use": "@vercel/static" },
     { "src": "estilos.css", "use": "@vercel/static" },
-    { "src": "js/mokepon.js", "use": "@vercel/static" },
+    { "src": "js/toypon.js", "use": "@vercel/static" },
     { "src": "fotos/**/*", "use": "@vercel/static" }
   ],
   "routes": [
