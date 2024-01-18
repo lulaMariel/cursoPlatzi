@@ -42,11 +42,11 @@ class Mokepones {
 
 }
 
-let woody = new Mokepones("Woody", "./fotos/woody.png", 5)
+let woody = new Mokepones("Woody", "fotos/woody.png", 5)
 
-let buzz = new Mokepones("Buzz", "./fotos/buzz.png", 5)
+let buzz = new Mokepones("Buzz", "fotos/buzz.png", 5)
 
-let rex = new Mokepones("Rex", "./fotos/rex.png", 5)
+let rex = new Mokepones("Rex", "fotos/rex.png", 5)
 
 woody.ataques.push(
     { nombre: "💧", id: "boton-agua" },
@@ -112,15 +112,15 @@ function seleccionarMascotaJugador() {
     if(inputWoody.checked) {
         spanMascotaJugador.innerHTML = inputWoody.id
         mascotaJugador = inputWoody.id
-        imagenJugador.src = "./fotos/woody.png"
+        imagenJugador.src = "fotos/woody.png"
     } else if(inputBuzz.checked) {
         spanMascotaJugador.innerHTML = inputBuzz.id
         mascotaJugador = inputBuzz.id
-        imagenJugador.src = "./fotos/buzz.png"
+        imagenJugador.src = "fotos/buzz.png"
     } else if(inputRex.checked) {
         spanMascotaJugador.innerHTML = inputRex.id
         mascotaJugador = inputRex.id
-        imagenJugador.src = "./fotos/rex.png"
+        imagenJugador.src = "fotos/rex.png"
     } else {
         alert("Selecciona una mascota")
         reiniciarJuego()
