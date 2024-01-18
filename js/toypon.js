@@ -42,13 +42,13 @@ class Mokepones {
 
 }
 
-let woody = new Mokepones("Woody", "fotos/woody.png", 5)
+let Woody = new Mokepones("Woody", "fotos/woody.png", 5)
 
-let buzz = new Mokepones("Buzz", "fotos/buzz.png", 5)
+let Buzz = new Mokepones("Buzz", "fotos/buzz.png", 5)
 
-let rex = new Mokepones("Rex", "fotos/rex.png", 5)
+let Rex = new Mokepones("Rex", "fotos/rex.png", 5)
 
-woody.ataques.push(
+Woody.ataques.push(
     { nombre: "💧", id: "boton-agua" },
     { nombre: "💧", id: "boton-agua" },
     { nombre: "💧", id: "boton-agua" },
@@ -56,7 +56,7 @@ woody.ataques.push(
     { nombre: "🌱", id: "boton-tierra"},
 )
 
-buzz.ataques.push(
+Buzz.ataques.push(
     { nombre: "🔥", id: "boton-fuego" },
     { nombre: "🔥", id: "boton-fuego" },
     { nombre: "🔥", id: "boton-fuego" },
@@ -64,7 +64,7 @@ buzz.ataques.push(
     { nombre: "💧", id: "boton-agua"},
 )
 
-rex.ataques.push(
+Rex.ataques.push(
     { nombre: "🌱", id: "boton-tierra"},
     { nombre: "🌱", id: "boton-tierra"},
     { nombre: "🌱", id: "boton-tierra"},
