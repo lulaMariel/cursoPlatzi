@@ -21,10 +21,10 @@ const ataquesDelJugador = document.getElementById("ataques-del-jugador")
 const ataquesDelEnemigo = document.getElementById("ataques-del-enemigo")
 const contenedorTarjetas = document.getElementById("contenedor-tarjetas")
 
-let mokepones = []
+let toypones = []
 let ataqueJugador
 let ataqueEnemigo
-let opcionDeMokepones
+let opcionDeToypones
 let inputWoody
 let inputBuzz
 let inputRex
@@ -32,7 +32,7 @@ let mascotaJugador
 let vidasJugador = 3
 let vidasEnemigo = 3
 
-class Mokepones {
+class Toypones {
     constructor(nombre, foto, vida) {
         this.nombre = nombre
         this.foto = foto
@@ -42,11 +42,11 @@ class Mokepones {
 
 }
 
-let woody = new Mokepones("Woody", "fotos/woody.png", 5)
+let woody = new Toypones("Woody", "fotos/woody.png", 5)
 
-let buzz = new Mokepones("Buzz", "fotos/buzz.png", 5)
+let buzz = new Toypones("Buzz", "fotos/buzz.png", 5)
 
-let rex = new Mokepones("Rex", "fotos/rex.png", 5)
+let rex = new Toypones("Rex", "fotos/rex.png", 5)
 
 woody.ataques.push(
     { nombre: "💧", id: "boton-agua" },
@@ -72,22 +72,22 @@ rex.ataques.push(
     { nombre: "🔥", id: "boton-fuego" },
 )
 
-mokepones.push(woody,buzz,rex)
+toypones.push(woody,buzz,rex)
 
 function iniciarJuego() {
     seccionSelecionarAtaque.style.display = "none"
 
     seccionReiniciar.style.display = "none"
 
-    mokepones.forEach((mokepon) => {
-        opcionDeMokepones = `
+    toypones.forEach((mokepon) => {
+        opcionDeToypones = `
         <input type="radio" name="mascota" id=${mokepon.nombre} />
         <label class="tarjeta-de-mokepon" for=${mokepon.nombre}>
             <p>${mokepon.nombre}</p>
             <img src=${mokepon.foto} alt=${mokepon.nombre}>
         </label>
         `
-    contenedorTarjetas.innerHTML += opcionDeMokepones
+    contenedorTarjetas.innerHTML += opcionDeToypones
 
         inputWoody = document.getElementById("Woody")
         inputBuzz = document.getElementById("Buzz")
@@ -132,19 +132,19 @@ function seleccionarMascotaJugador() {
 
 function extraerAtaques(mascotaJugador) {
     let ataques
-    for (let i = 0; i < mokepones.length; i++) {
-        if (mascotaJugador == mokepones[i].nombre) {
-            ataques = mokepones[i].ataques
+    for (let i = 0; i < toypones.length; i++) {
+        if (mascotaJugador == toypones[i].nombre) {
+            ataques = toypones[i].ataques
         }
     }
     mostrarAtaques(ataques)
 }
 
 function seleccionarMascotaEnemigo() {
-    let mascotaAleatoria = aleatorio(0, mokepones.length - 1)
+    let mascotaAleatoria = aleatorio(0, toypones.length - 1)
 
-    spanMascotaEnemigo.innerHTML = mokepones[mascotaAleatoria].nombre
-    document.getElementById("imagen-enemigo").src = mokepones[mascotaAleatoria].foto
+    spanMascotaEnemigo.innerHTML = toypones[mascotaAleatoria].nombre
+    document.getElementById("imagen-enemigo").src = toypones[mascotaAleatoria].foto
 }
 
 function ataqueFuego() {
