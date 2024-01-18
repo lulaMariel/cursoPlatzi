@@ -20,7 +20,7 @@ const contenedorTarjetas = document.getElementById("contenedor-tarjetas")
 const contenedorAtaques = document.getElementById("contenedor-ataques")
 
 let toypones = []
-let ataqueJugador
+let ataqueJugador = []
 let ataqueEnemigo
 let opcionDeToypones
 let inputWoody
@@ -31,6 +31,7 @@ let ataquesToypon
 let botonFuego
 let botonAgua
 let botonTierra
+let botones = []
 let vidasJugador = 3
 let vidasEnemigo = 3
 
@@ -141,7 +142,7 @@ function extraerAtaques(mascotaJugador) {
 function mostrarAtaques(ataques) {
     ataques.forEach((ataque) => {
         ataquesToypon = `
-        <button id=${ataque.id} class="boton-ataque">${ataque.nombre}</button>
+        <button id=${ataque.id} class="boton-ataque BAtaques">${ataque.nombre}</button>
         `
         contenedorAtaques.innerHTML += ataquesToypon
     })
@@ -149,10 +150,27 @@ function mostrarAtaques(ataques) {
     botonFuego = document.getElementById("boton-fuego")
     botonAgua = document.getElementById("boton-agua")
     botonTierra = document.getElementById("boton-tierra")
+    botones = document.querySelectorAll(".BAtaques")
+}
 
-    botonFuego.addEventListener("click", ataqueFuego)
-    botonAgua.addEventListener("click", ataqueAgua)
-    botonTierra.addEventListener("click", ataqueTierra)
+function secuenciaAtaques() {
+    botones.forEach((boton) => {
+        boton.addEventListener("click", (e) => {
+            if (e.target.textContent == "🔥") {
+                ataqueJugador.push("FUEGO")
+                console.log(ataqueJugador)
+                boton.style.background = "#112f58"
+            } else if(e.target.textContent == "💧") {
+                ataqueJugador.push("AGUA")
+                console.log(ataqueJugador)
+                boton.style.background = "#112f58"
+            } else {
+                ataqueJugador.push("TIERRA")
+                console.log(ataqueJugador)
+                boton.style.background = "#112f58"
+            }
+        })
+    })
 }
 
 function seleccionarMascotaEnemigo() {
@@ -160,21 +178,8 @@ function seleccionarMascotaEnemigo() {
 
     spanMascotaEnemigo.innerHTML = toypones[mascotaAleatoria].nombre
     document.getElementById("imagen-enemigo").src = toypones[mascotaAleatoria].foto
-}
 
-function ataqueFuego() {
-    ataqueJugador = "🔥"
-    ataqueAleatorioEnemigo()
-}
-
-function ataqueAgua() {
-    ataqueJugador = "💧"
-    ataqueAleatorioEnemigo()
-}
-
-function ataqueTierra() {
-    ataqueJugador = "🌱"
-    ataqueAleatorioEnemigo()
+    secuenciaAtaques()
 }
 
 function ataqueAleatorioEnemigo() {
