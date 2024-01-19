@@ -19,6 +19,9 @@ const ataquesDelEnemigo = document.getElementById("ataques-del-enemigo")
 const contenedorTarjetas = document.getElementById("contenedor-tarjetas")
 const contenedorAtaques = document.getElementById("contenedor-ataques")
 
+const seccionVerMapa = document.getElementById("ver-mapa")
+const mapa = document.getElementById("mapa")
+
 let toypones = []
 let ataqueJugador = []
 let ataqueEnemigo = []
@@ -39,6 +42,7 @@ let victoriasJugador = 0
 let victoriasEnemigo = 0
 let vidasJugador = 3
 let vidasEnemigo = 3
+let lienzo = mapa.getContext("2d")
 
 class Toypones {
     constructor(nombre, foto, vida) {
@@ -85,6 +89,8 @@ toypones.push(woody,buzz,rex)
 function iniciarJuego() {
     seccionSelecionarAtaque.style.display = "none"
 
+    seccionVerMapa.style.display = "none"
+
     seccionReiniciar.style.display = "none"
 
     toypones.forEach((toypon) => {
@@ -111,7 +117,16 @@ function iniciarJuego() {
 function seleccionarMascotaJugador() {
     seccionSelecionarMascota.style.display = "none"
     
-    seccionSelecionarAtaque.style.display = "flex"
+    seccionVerMapa.style.display = "flex"
+    let imagenDeWoody = new Image()
+    imagenDeWoody.src = woody.foto
+    lienzo.drawImage(
+        imagenDeWoody,
+        20,
+        40,
+        100,
+        100
+    )
 
     if(inputWoody.checked) {
         spanMascotaJugador.innerHTML = inputWoody.id
@@ -163,17 +178,14 @@ function secuenciaAtaques() {
         boton.addEventListener("click", (e) => {
             if (e.target.textContent == "🔥") {
                 ataqueJugador.push("🔥")
-                console.log(ataqueJugador)
                 boton.style.background = "#3C0753"
                 boton.disabled = true
             } else if(e.target.textContent == "💧") {
                 ataqueJugador.push("💧")
-                console.log(ataqueJugador)
                 boton.style.background = "#3C0753"
                 boton.disabled = true
             } else {
                 ataqueJugador.push("🌱")
-                console.log(ataqueJugador)
                 boton.style.background = "#3C0753"
                 boton.disabled = true
             }

@@ -175,6 +175,16 @@ input:checked + label {
     background-color: transparent;
 }
 
+#ver-mapa {
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+#mapa {
+    border: 2px solid white
+}
+
 @media (max-width: 500px) {
     .tarjetas, .tarjetas-ataques {
         flex-direction: column;
