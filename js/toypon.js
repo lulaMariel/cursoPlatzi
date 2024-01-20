@@ -56,8 +56,8 @@ class Toypones {
         this.ataques = []
         this.x = x
         this.y = y
-        this.ancho = 100
-        this.alto = 100
+        this.ancho = 80
+        this.alto = 180
         this.mapaFoto = new Image()
         this.mapaFoto.src = fotoMapa
         this.velocidadX = 0
