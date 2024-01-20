@@ -30,6 +30,7 @@ let inputWoody
 let inputBuzz
 let inputRex
 let mascotaJugador
+let objetoMascotaJugador
 let ataquesToypon
 let ataquesToyponEnemigo
 let botonFuego
@@ -44,6 +45,8 @@ let vidasJugador = 3
 let vidasEnemigo = 3
 let lienzo = mapa.getContext("2d")
 let intervalo
+let mapaBackground = new Image()
+mapaBackground.src = "fotos/toymap.png"
 
 class Toypones {
     constructor(nombre, foto, vida) {
@@ -125,9 +128,6 @@ function iniciarJuego() {
 
 function seleccionarMascotaJugador() {
     seccionSelecionarMascota.style.display = "none"
-    
-    seccionVerMapa.style.display = "flex"
-    iniciarMapa()
 
     if(inputWoody.checked) {
         spanMascotaJugador.innerHTML = inputWoody.id
@@ -148,6 +148,8 @@ function seleccionarMascotaJugador() {
 
     extraerAtaques(mascotaJugador)
     seleccionarMascotaEnemigo()
+    seccionVerMapa.style.display = "flex"
+    iniciarMapa()
 }
 
 function extraerAtaques(mascotaJugador) {
@@ -286,38 +288,45 @@ function aleatorio(min, max) {
     return Math.floor(Math.random() * (max - min + 1) + min)
 }
 
-function pintarPersonaje() {
-    woody.x = woody.x + woody.velocidadX
-    woody.y = woody.y + woody.velocidadY
+function pintarCanvas() {
+    objetoMascotaJugador.x = objetoMascotaJugador.x + objetoMascotaJugador.velocidadX
+    objetoMascotaJugador.y = objetoMascotaJugador.y + objetoMascotaJugador.velocidadY
     lienzo.clearRect(0, 0, mapa.width, mapa.height)
     lienzo.drawImage(
-        woody.mapaFoto,
-        woody.x,
-        woody.y,
-        woody.ancho,
-        woody.alto
+        mapaBackground,
+        0,
+        0,
+        mapa.width,
+        mapa.height
+    )
+    lienzo.drawImage(
+        objetoMascotaJugador.mapaFoto,
+        objetoMascotaJugador.x,
+        objetoMascotaJugador.y,
+        objetoMascotaJugador.ancho,
+        objetoMascotaJugador.alto
     )
 }
 
 function moverDerecha() {
-    woody.velocidadX = 5
+    objetoMascotaJugador.velocidadX = 5
 }
 
 function moverIzquierda() {
-    woody.velocidadX = -5
+    objetoMascotaJugador.velocidadX = -5
 }
 
 function moverArriba() {
-    woody.velocidadY = -5
+    objetoMascotaJugador.velocidadY = -5
 }
 
 function moverAbajo() {
-    woody.velocidadY = 5
+    objetoMascotaJugador.velocidadY = 5
 }
 
 function detenerMovimiento() {
-    woody.velocidadX = 0
-    woody.velocidadY = 0
+    objetoMascotaJugador.velocidadX = 0
+    objetoMascotaJugador.velocidadY = 0
 }
 
 function teclas(evento) {
@@ -340,11 +349,23 @@ function teclas(evento) {
 }
 
 function iniciarMapa() {
-    intervalo = setInterval(pintarPersonaje, 50)
-    
+    mapa.width = 600
+    mapa.height = 400
+    objetoMascotaJugador = objetoMascota(mascotaJugador)
+    intervalo = setInterval(pintarCanvas, 50)
+
     window.addEventListener("keydown", teclas)
 
     window.addEventListener("keyup", detenerMovimiento)
+}
+
+function objetoMascota() {
+    for (let i = 0; i < toypones.length; i++) {
+        if (mascotaJugador == toypones[i].nombre) {
+            return toypones[i]
+        }
+    }
+        
 }
 
 
