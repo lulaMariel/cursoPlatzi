@@ -127,7 +127,7 @@ function seleccionarMascotaJugador() {
     seccionSelecionarMascota.style.display = "none"
     
     seccionVerMapa.style.display = "flex"
-    intervalo = setInterval(pintarPersonaje, 50)
+    iniciarMapa()
 
     if(inputWoody.checked) {
         spanMascotaJugador.innerHTML = inputWoody.id
@@ -318,6 +318,33 @@ function moverAbajo() {
 function detenerMovimiento() {
     woody.velocidadX = 0
     woody.velocidadY = 0
+}
+
+function teclas(evento) {
+    switch (evento.key) {
+        case "ArrowUp":
+            moverArriba()
+            break
+        case "ArrowDown":
+            moverAbajo()
+            break
+        case "ArrowLeft":
+            moverIzquierda()
+            break
+        case "ArrowRight":
+            moverDerecha()
+            break
+        default:
+            break
+    }
+}
+
+function iniciarMapa() {
+    intervalo = setInterval(pintarPersonaje, 50)
+    
+    window.addEventListener("keydown", teclas)
+
+    window.addEventListener("keyup", detenerMovimiento)
 }
 
 
