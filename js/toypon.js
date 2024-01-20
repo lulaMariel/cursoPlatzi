@@ -57,8 +57,8 @@ if(anchoMapa > anchoMaxMapa) {
 
 altura = anchoMapa * 600 / 800
 
-mapa.width = anchoMapa
-mapa.height = altura
+mapa.width = anchoMapa + 200
+mapa.height = altura + 100
 
 class Toypones {
     constructor(nombre, foto, vida, fotoMapa) {
