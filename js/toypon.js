@@ -57,7 +57,7 @@ class Toypones {
         this.x = x
         this.y = y
         this.ancho = 80
-        this.alto = 180
+        this.alto = 80
         this.mapaFoto = new Image()
         this.mapaFoto.src = fotoMapa
         this.velocidadX = 0
@@ -96,6 +96,14 @@ woody.ataques.push(
     { nombre: "🌱", id: "boton-tierra"},
 )
 
+woodyEnemigo.ataques.push(
+    { nombre: "💧", id: "boton-agua" },
+    { nombre: "💧", id: "boton-agua" },
+    { nombre: "💧", id: "boton-agua" },
+    { nombre: "🔥", id: "boton-fuego"},
+    { nombre: "🌱", id: "boton-tierra"},
+)
+
 buzz.ataques.push(
     { nombre: "🔥", id: "boton-fuego" },
     { nombre: "🔥", id: "boton-fuego" },
@@ -104,7 +112,23 @@ buzz.ataques.push(
     { nombre: "💧", id: "boton-agua"},
 )
 
+buzzEnemigo.ataques.push(
+    { nombre: "🔥", id: "boton-fuego" },
+    { nombre: "🔥", id: "boton-fuego" },
+    { nombre: "🔥", id: "boton-fuego" },
+    { nombre: "🌱", id: "boton-tierra"},
+    { nombre: "💧", id: "boton-agua"},
+)
+
 rex.ataques.push(
+    { nombre: "🌱", id: "boton-tierra"},
+    { nombre: "🌱", id: "boton-tierra"},
+    { nombre: "🌱", id: "boton-tierra"},
+    { nombre: "💧", id: "boton-agua"},
+    { nombre: "🔥", id: "boton-fuego" },
+)
+
+rexEnemigo.ataques.push(
     { nombre: "🌱", id: "boton-tierra"},
     { nombre: "🌱", id: "boton-tierra"},
     { nombre: "🌱", id: "boton-tierra"},
@@ -163,7 +187,6 @@ function seleccionarMascotaJugador() {
     }
 
     extraerAtaques(mascotaJugador)
-    seleccionarMascotaEnemigo()
     seccionVerMapa.style.display = "flex"
     iniciarMapa()
 }
@@ -213,17 +236,18 @@ function secuenciaAtaques() {
     })
 }
 
-function seleccionarMascotaEnemigo() {
+function seleccionarMascotaEnemigo(enemigo) {
     let mascotaAleatoria = aleatorio(0, toypones.length - 1)
 
-    spanMascotaEnemigo.innerHTML = toypones[mascotaAleatoria].nombre
-    document.getElementById("imagen-enemigo").src = toypones[mascotaAleatoria].foto
-    ataquesToyponEnemigo = toypones[mascotaAleatoria].ataques
+    spanMascotaEnemigo.innerHTML = enemigo.nombre
+    document.getElementById("imagen-enemigo").src = enemigo.foto
+    ataquesToyponEnemigo = enemigo.ataques
 
     secuenciaAtaques()
 }
 
 function ataqueAleatorioEnemigo() {
+    console.log(ataquesToyponEnemigo)
     let ataqueAleatorio = aleatorio(0, ataquesToyponEnemigo.length - 1)
 
     if(ataqueAleatorio == 0 || ataqueAleatorio == 1) {
@@ -319,6 +343,11 @@ function pintarCanvas() {
     woodyEnemigo.pintarToypon()
     buzzEnemigo.pintarToypon()
     rexEnemigo.pintarToypon()
+    if(objetoMascotaJugador.velocidadX !== 0 || objetoMascotaJugador.velocidadY !== 0) {
+        revisarColision(woodyEnemigo)
+        revisarColision(buzzEnemigo)
+        revisarColision(rexEnemigo)
+    }
 }
 
 function moverDerecha() {
@@ -379,6 +408,31 @@ function objetoMascota() {
         }
     }
         
+}
+
+function revisarColision(enemigo) {
+    const arribaEnemigo = enemigo.y
+    const abajoEnemigo = enemigo.y + enemigo.alto
+    const derechaEnemigo = enemigo.x + enemigo.ancho
+    const izquierdaEnemigo = enemigo.x
+
+    const arribaMascota = objetoMascotaJugador.y
+    const abajoMascota = objetoMascotaJugador.y + objetoMascotaJugador.alto
+    const derechaMascota = objetoMascotaJugador.x + objetoMascotaJugador.ancho
+    const izquierdaMascota = objetoMascotaJugador.x
+
+
+    if(
+        abajoMascota < arribaEnemigo || arribaMascota > abajoEnemigo || derechaMascota < izquierdaEnemigo || izquierdaMascota > derechaEnemigo
+    ) {
+        return;
+    }
+
+    detenerMovimiento()
+    clearInterval(intervalo)
+    seccionSelecionarAtaque.style.display = "flex"
+    seccionVerMapa.style.display = "none"
+    seleccionarMascotaEnemigo(enemigo)
 }
 
 
