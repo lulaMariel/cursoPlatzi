@@ -43,6 +43,7 @@ let victoriasEnemigo = 0
 let vidasJugador = 3
 let vidasEnemigo = 3
 let lienzo = mapa.getContext("2d")
+let intervalo
 
 class Toypones {
     constructor(nombre, foto, vida) {
@@ -56,6 +57,8 @@ class Toypones {
         this.alto = 80
         this.mapaFoto = new Image()
         this.mapaFoto.src = foto
+        this.velocidadX = 0
+        this.velocidadY = 0
     }
 
 }
@@ -124,6 +127,7 @@ function seleccionarMascotaJugador() {
     seccionSelecionarMascota.style.display = "none"
     
     seccionVerMapa.style.display = "flex"
+    intervalo = setInterval(pintarPersonaje, 50)
 
     if(inputWoody.checked) {
         spanMascotaJugador.innerHTML = inputWoody.id
@@ -283,6 +287,8 @@ function aleatorio(min, max) {
 }
 
 function pintarPersonaje() {
+    woody.x = woody.x + woody.velocidadX
+    woody.y = woody.y + woody.velocidadY
     lienzo.clearRect(0, 0, mapa.width, mapa.height)
     lienzo.drawImage(
         woody.mapaFoto,
@@ -293,9 +299,25 @@ function pintarPersonaje() {
     )
 }
 
-function moverWoody() {
-    woody.x = woody.x + 5
-    pintarPersonaje()
+function moverDerecha() {
+    woody.velocidadX = 5
+}
+
+function moverIzquierda() {
+    woody.velocidadX = -5
+}
+
+function moverArriba() {
+    woody.velocidadY = -5
+}
+
+function moverAbajo() {
+    woody.velocidadY = 5
+}
+
+function detenerMovimiento() {
+    woody.velocidadX = 0
+    woody.velocidadY = 0
 }
 
 
