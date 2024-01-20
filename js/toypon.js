@@ -47,17 +47,29 @@ let lienzo = mapa.getContext("2d")
 let intervalo
 let mapaBackground = new Image()
 mapaBackground.src = "fotos/toymap.png"
+let altura
+let anchoMapa = window.innerWidth - 20
+const anchoMaxMapa = 350
+
+if(anchoMapa > anchoMaxMapa) {
+    anchoMapa = anchoMaxMapa - 20
+}
+
+altura = anchoMapa * 600 / 800
+
+mapa.width = anchoMapa
+mapa.height = altura
 
 class Toypones {
-    constructor(nombre, foto, vida, fotoMapa, x = 10, y = 10) {
+    constructor(nombre, foto, vida, fotoMapa) {
         this.nombre = nombre
         this.foto = foto
         this.vida = vida
         this.ataques = []
-        this.x = x
-        this.y = y
         this.ancho = 80
         this.alto = 80
+        this.x = aleatorio(0, mapa.width - this.ancho)
+        this.y = aleatorio(0, mapa.height - this.alto)
         this.mapaFoto = new Image()
         this.mapaFoto.src = fotoMapa
         this.velocidadX = 0
@@ -82,11 +94,11 @@ let buzz = new Toypones("Buzz", "fotos/buzz.png", 5, "fotos/carabuzz.png")
 
 let rex = new Toypones("Rex", "fotos/rex.png", 5, "fotos/cararex.png")
 
-let woodyEnemigo = new Toypones("Woody", "fotos/woody.png", 5, "fotos/carawoody.png", 80, 120)
+let woodyEnemigo = new Toypones("Woody", "fotos/woody.png", 5, "fotos/carawoody.png")
 
-let buzzEnemigo = new Toypones("Buzz", "fotos/buzz.png", 5, "fotos/carabuzz.png", 150, 95)
+let buzzEnemigo = new Toypones("Buzz", "fotos/buzz.png", 5, "fotos/carabuzz.png")
 
-let rexEnemigo = new Toypones("Rex", "fotos/rex.png", 5, "fotos/cararex.png", 200, 190)
+let rexEnemigo = new Toypones("Rex", "fotos/rex.png", 5, "fotos/cararex.png")
 
 woody.ataques.push(
     { nombre: "💧", id: "boton-agua" },
@@ -391,8 +403,6 @@ function teclas(evento) {
 }
 
 function iniciarMapa() {
-    mapa.width = 600
-    mapa.height = 400
     objetoMascotaJugador = objetoMascota(mascotaJugador)
     intervalo = setInterval(pintarCanvas, 50)
 
