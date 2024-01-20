@@ -49,28 +49,44 @@ let mapaBackground = new Image()
 mapaBackground.src = "fotos/toymap.png"
 
 class Toypones {
-    constructor(nombre, foto, vida) {
+    constructor(nombre, foto, vida, fotoMapa, x = 10, y = 10) {
         this.nombre = nombre
         this.foto = foto
         this.vida = vida
         this.ataques = []
-        this.x = 20
-        this.y = 30
-        this.ancho = 80
-        this.alto = 80
+        this.x = x
+        this.y = y
+        this.ancho = 100
+        this.alto = 100
         this.mapaFoto = new Image()
-        this.mapaFoto.src = foto
+        this.mapaFoto.src = fotoMapa
         this.velocidadX = 0
         this.velocidadY = 0
     }
 
+    pintarToypon() {
+        lienzo.drawImage(
+            this.mapaFoto,
+            this.x,
+            this.y,
+            this.ancho,
+            this.alto
+        )
+    }
+
 }
 
-let woody = new Toypones("Woody", "fotos/woody.png", 5)
+let woody = new Toypones("Woody", "fotos/woody.png", 5, "fotos/carawoody.png")
 
-let buzz = new Toypones("Buzz", "fotos/buzz.png", 5)
+let buzz = new Toypones("Buzz", "fotos/buzz.png", 5, "fotos/carabuzz.png")
 
-let rex = new Toypones("Rex", "fotos/rex.png", 5)
+let rex = new Toypones("Rex", "fotos/rex.png", 5, "fotos/cararex.png")
+
+let woodyEnemigo = new Toypones("Woody", "fotos/woody.png", 5, "fotos/carawoody.png", 80, 120)
+
+let buzzEnemigo = new Toypones("Buzz", "fotos/buzz.png", 5, "fotos/carabuzz.png", 150, 95)
+
+let rexEnemigo = new Toypones("Rex", "fotos/rex.png", 5, "fotos/cararex.png", 200, 190)
 
 woody.ataques.push(
     { nombre: "💧", id: "boton-agua" },
@@ -299,13 +315,10 @@ function pintarCanvas() {
         mapa.width,
         mapa.height
     )
-    lienzo.drawImage(
-        objetoMascotaJugador.mapaFoto,
-        objetoMascotaJugador.x,
-        objetoMascotaJugador.y,
-        objetoMascotaJugador.ancho,
-        objetoMascotaJugador.alto
-    )
+    objetoMascotaJugador.pintarToypon()
+    woodyEnemigo.pintarToypon()
+    buzzEnemigo.pintarToypon()
+    rexEnemigo.pintarToypon()
 }
 
 function moverDerecha() {
