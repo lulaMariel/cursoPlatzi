@@ -66,8 +66,8 @@ class Toypones {
         this.foto = foto
         this.vida = vida
         this.ataques = []
-        this.ancho = 80
-        this.alto = 80
+        this.ancho = 60
+        this.alto = 60
         this.x = aleatorio(0, mapa.width - this.ancho)
         this.y = aleatorio(0, mapa.height - this.alto)
         this.mapaFoto = new Image()
