@@ -388,13 +388,25 @@ function teclas(evento) {
         case "ArrowUp":
             moverArriba()
             break
+        case "w":
+            moverArriba()
+            break
         case "ArrowDown":
+            moverAbajo()
+            break
+        case "s":
             moverAbajo()
             break
         case "ArrowLeft":
             moverIzquierda()
             break
+        case "a":
+            moverIzquierda()
+            break
         case "ArrowRight":
+            moverDerecha()
+            break
+        case "d":
             moverDerecha()
             break
         default:
@@ -409,6 +421,31 @@ function iniciarMapa() {
     window.addEventListener("keydown", teclas)
 
     window.addEventListener("keyup", detenerMovimiento)
+
+    const botonArriba = document.getElementById("mover-arriba");
+    const botonIzquierda = document.getElementById("mover-izquierda");
+    const botonAbajo = document.getElementById("mover-abajo");
+    const botonDerecha = document.getElementById("mover-derecha");
+    
+    if (botonArriba) {
+        botonArriba.addEventListener("touchstart", () => moverArriba(), false);
+        botonArriba.addEventListener("touchend", detenerMovimiento, false);
+    }
+    
+    if (botonIzquierda) {
+        botonIzquierda.addEventListener("touchstart", () => moverIzquierda(), false);
+        botonIzquierda.addEventListener("touchend", detenerMovimiento, false);
+    }
+    
+    if (botonAbajo) {
+        botonAbajo.addEventListener("touchstart", () => moverAbajo(), false);
+        botonAbajo.addEventListener("touchend", detenerMovimiento, false);
+    }
+    
+    if (botonDerecha) {
+        botonDerecha.addEventListener("touchstart", () => moverDerecha(), false);
+        botonDerecha.addEventListener("touchend", detenerMovimiento, false);
+    }  
 }
 
 function objetoMascota() {
