@@ -160,7 +160,7 @@ function iniciarJuego() {
 }
 
 function unirseAlJuego() {
-    fetch("http://192.168.0.143:8080/unirse")
+    fetch("/unirse")
         .then(function (res) {
             if(res.ok) {
                 res.text()
@@ -198,7 +198,7 @@ function seleccionarMascotaJugador() {
 }
 
 function seleccionarToypon(mascotaJugador) {
-    fetch(`http://192.168.0.143:8080/toypon/${jugadorId}`, {
+    fetch(`/toypon/${jugadorId}`, {
         method: "post",
         headers: {
             "Content-Type": "application/json"
@@ -257,7 +257,7 @@ function secuenciaAtaques() {
 }
 
 function enviarAtaques() {
-    fetch(`http://192.168.0.143:8080/toypon/${jugadorId}/ataques`, {
+    fetch(`/toypon/${jugadorId}/ataques`, {
         method: "post",
         headers: {
             "Content-Type": "application/json"
@@ -270,7 +270,7 @@ function enviarAtaques() {
 }
 
 function obtenerAtaques() {
-    fetch(`http://192.168.0.143:8080/toypon/${enemigoId}/ataques`)
+    fetch(`/toypon/${enemigoId}/ataques`)
         .then(function (res) {
             if (res.ok) {
                 res.json()
@@ -400,7 +400,7 @@ function pintarCanvas() {
 }
 
 function enviarPosicion(x, y) {
-    fetch(`http://192.168.0.143:8080/toypon/${jugadorId}/posicion`, {
+    fetch(`/toypon/${jugadorId}/posicion`, {
         method: "post",
         headers: {
             "Content-Type": "application/json"
