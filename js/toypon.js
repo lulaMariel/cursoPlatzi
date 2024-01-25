@@ -62,7 +62,8 @@ mapa.width = anchoMapa + 200
 mapa.height = altura + 100
 
 class Toypones {
-    constructor(nombre, foto, vida, fotoMapa) {
+    constructor(nombre, foto, vida, fotoMapa, id = null) {
+        this.id = id
         this.nombre = nombre
         this.foto = foto
         this.vida = vida
@@ -86,7 +87,6 @@ class Toypones {
             this.alto
         )
     }
-
 }
 
 let woody = new Toypones("Woody", "fotos/woody.png", 5, "fotos/carawoody.png")
@@ -95,59 +95,35 @@ let buzz = new Toypones("Buzz", "fotos/buzz.png", 5, "fotos/carabuzz.png")
 
 let rex = new Toypones("Rex", "fotos/rex.png", 5, "fotos/cararex.png")
 
-let woodyEnemigo = new Toypones("Woody", "fotos/woody.png", 5, "fotos/carawoody.png")
-
-let buzzEnemigo = new Toypones("Buzz", "fotos/buzz.png", 5, "fotos/carabuzz.png")
-
-let rexEnemigo = new Toypones("Rex", "fotos/rex.png", 5, "fotos/cararex.png")
-
-woody.ataques.push(
+const woodyAtaques = [
     { nombre: "💧", id: "boton-agua" },
     { nombre: "💧", id: "boton-agua" },
     { nombre: "💧", id: "boton-agua" },
     { nombre: "🔥", id: "boton-fuego"},
     { nombre: "🌱", id: "boton-tierra"},
-)
+]
 
-woodyEnemigo.ataques.push(
-    { nombre: "💧", id: "boton-agua" },
-    { nombre: "💧", id: "boton-agua" },
-    { nombre: "💧", id: "boton-agua" },
-    { nombre: "🔥", id: "boton-fuego"},
-    { nombre: "🌱", id: "boton-tierra"},
-)
+woody.ataques.push(...woodyAtaques)
 
-buzz.ataques.push(
+const buzzAtaques = [
     { nombre: "🔥", id: "boton-fuego" },
     { nombre: "🔥", id: "boton-fuego" },
     { nombre: "🔥", id: "boton-fuego" },
     { nombre: "🌱", id: "boton-tierra"},
     { nombre: "💧", id: "boton-agua"},
-)
+]
 
-buzzEnemigo.ataques.push(
-    { nombre: "🔥", id: "boton-fuego" },
-    { nombre: "🔥", id: "boton-fuego" },
-    { nombre: "🔥", id: "boton-fuego" },
-    { nombre: "🌱", id: "boton-tierra"},
-    { nombre: "💧", id: "boton-agua"},
-)
+buzz.ataques.push(...buzzAtaques)
 
-rex.ataques.push(
+const rexAtaques = [
     { nombre: "🌱", id: "boton-tierra"},
     { nombre: "🌱", id: "boton-tierra"},
     { nombre: "🌱", id: "boton-tierra"},
     { nombre: "💧", id: "boton-agua"},
     { nombre: "🔥", id: "boton-fuego" },
-)
+]
 
-rexEnemigo.ataques.push(
-    { nombre: "🌱", id: "boton-tierra"},
-    { nombre: "🌱", id: "boton-tierra"},
-    { nombre: "🌱", id: "boton-tierra"},
-    { nombre: "💧", id: "boton-agua"},
-    { nombre: "🔥", id: "boton-fuego" },
-)
+rex.ataques.push(...rexAtaques)
 
 toypones.push(woody,buzz,rex)
 
@@ -381,6 +357,9 @@ function pintarCanvas() {
         mapa.height
     )
     objetoMascotaJugador.pintarToypon()
+
+    enviarPosicion(objetoMascotaJugador.x, objetoMascotaJugador.y)
+
     woodyEnemigo.pintarToypon()
     buzzEnemigo.pintarToypon()
     rexEnemigo.pintarToypon()
@@ -389,6 +368,43 @@ function pintarCanvas() {
         revisarColision(buzzEnemigo)
         revisarColision(rexEnemigo)
     }
+}
+
+function enviarPosicion(x, y) {
+    fetch(`http://localhost:8080/toypon/${jugadorId}/posicion`, {
+        method: "post",
+        headers: {
+            "Content-Type": "application/json"
+        },
+        body: JSON.stringify({
+            x,
+            y
+        })
+    })
+    .then (function (res) {
+        if (res.ok) {
+            res.json()
+                .then (function ({ enemigos }) {
+                    console.log(enemigos)
+                    enemigos.forEach(function (enemigo) {
+                        let toyponEnemigo = null
+                        if (enemigo.toypon != undefined) {
+                            const toyponNombre = enemigo.toypon.nombre || ""
+                            if (toyponNombre == "Woody") {
+                                toyponEnemigo = new Toypones("Woody", "fotos/woody.png", 5, "fotos/carawoody.png")
+                            } else if (toyponNombre == "Buzz") {
+                                toyponEnemigo = new Toypones("Buzz", "fotos/buzz.png", 5, "fotos/carabuzz.png")
+                            } else if (toyponNombre == "Rex") {
+                                toyponEnemigo = new Toypones("Rex", "fotos/rex.png", 5, "fotos/cararex.png")
+                            }}
+                        toyponEnemigo.x = enemigo.x
+                        toyponEnemigo.y = enemigo.y
+
+                        toyponEnemigo.pintarToypon()
+                    })
+                })
+        }
+    })
 }
 
 function moverDerecha() {
