@@ -267,6 +267,22 @@ function enviarAtaques() {
             ataques: ataqueJugador
         })
     })
+    intervalo = setInterval(obtenerAtaques, 50)
+}
+
+function obtenerAtaques() {
+    fetch(`http://localhost:8080/toypon/${enemigoId}/ataques`)
+        .then(function (res) {
+            if (res.ok) {
+                res.json()
+                    .then(function ({ ataques }) {
+                        if (ataques.length == 5) {
+                            ataqueEnemigo = ataques
+                            combate()
+                        }
+                    })
+            }
+        })
 }
 
 function seleccionarMascotaEnemigo(enemigo) {
@@ -306,6 +322,8 @@ function indexAmbosJugadores(jugador, enemigo) {
 }
 
 function combate() {
+    clearInterval(intervalo)
+
     for (let index = 0; index < ataqueJugador.length; index++) {
         if(ataqueJugador[index] == ataqueEnemigo[index]) {
             indexAmbosJugadores(index, index)
