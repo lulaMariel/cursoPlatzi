@@ -24,6 +24,7 @@ const mapa = document.getElementById("mapa")
 
 let jugadorId = null
 let toypones = []
+let toyponesEnemigos = []
 let ataqueJugador = []
 let ataqueEnemigo = []
 let opcionDeToypones
@@ -360,9 +361,9 @@ function pintarCanvas() {
 
     enviarPosicion(objetoMascotaJugador.x, objetoMascotaJugador.y)
 
-    woodyEnemigo.pintarToypon()
-    buzzEnemigo.pintarToypon()
-    rexEnemigo.pintarToypon()
+    toyponesEnemigos.forEach(function (toypon) {
+        toypon.pintarToypon()
+    })
     if(objetoMascotaJugador.velocidadX !== 0 || objetoMascotaJugador.velocidadY !== 0) {
         revisarColision(woodyEnemigo)
         revisarColision(buzzEnemigo)
@@ -386,21 +387,20 @@ function enviarPosicion(x, y) {
             res.json()
                 .then (function ({ enemigos }) {
                     console.log(enemigos)
-                    enemigos.forEach(function (enemigo) {
+                    toyponesEnemigos = enemigos.map(function (enemigo) {
                         let toyponEnemigo = null
-                        if (enemigo.toypon != undefined) {
-                            const toyponNombre = enemigo.toypon.nombre || ""
-                            if (toyponNombre == "Woody") {
-                                toyponEnemigo = new Toypones("Woody", "fotos/woody.png", 5, "fotos/carawoody.png")
-                            } else if (toyponNombre == "Buzz") {
-                                toyponEnemigo = new Toypones("Buzz", "fotos/buzz.png", 5, "fotos/carabuzz.png")
-                            } else if (toyponNombre == "Rex") {
-                                toyponEnemigo = new Toypones("Rex", "fotos/rex.png", 5, "fotos/cararex.png")
-                            }}
+                        const toyponNombre = enemigo.toypon.nombre || ""
+                        if (toyponNombre == "Woody") {
+                            toyponEnemigo = new Toypones("Woody", "fotos/woody.png", 5, "fotos/carawoody.png")
+                        } else if (toyponNombre == "Buzz") {
+                            toyponEnemigo = new Toypones("Buzz", "fotos/buzz.png", 5, "fotos/carabuzz.png")
+                        } else if (toyponNombre == "Rex") {
+                            toyponEnemigo = new Toypones("Rex", "fotos/rex.png", 5, "fotos/cararex.png")
+                        }
                         toyponEnemigo.x = enemigo.x
                         toyponEnemigo.y = enemigo.y
 
-                        toyponEnemigo.pintarToypon()
+                        return toyponEnemigo
                     })
                 })
         }
