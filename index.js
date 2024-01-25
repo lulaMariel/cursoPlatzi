@@ -5,6 +5,7 @@ const app = express()
 
 const jugadores = []
 
+app.use(express.static("publico"))
 app.use(cors ())
 app.use(express.json())
 

@@ -160,7 +160,7 @@ function iniciarJuego() {
 }
 
 function unirseAlJuego() {
-    fetch("http://localhost:8080/unirse")
+    fetch("http://192.168.0.143:8080/unirse")
         .then(function (res) {
             if(res.ok) {
                 res.text()
@@ -173,8 +173,6 @@ function unirseAlJuego() {
 }
 
 function seleccionarMascotaJugador() {
-    seccionSelecionarMascota.style.display = "none"
-
     if(inputWoody.checked) {
         spanMascotaJugador.innerHTML = inputWoody.id
         mascotaJugador = inputWoody.id
@@ -189,9 +187,10 @@ function seleccionarMascotaJugador() {
         imagenJugador.src = "fotos/rex.png"
     } else {
         alert("Selecciona una mascota")
-        reiniciarJuego()
+        return
     }
-    
+    seccionSelecionarMascota.style.display = "none"
+
     seleccionarToypon(mascotaJugador)
     extraerAtaques(mascotaJugador)
     seccionVerMapa.style.display = "flex"
@@ -199,7 +198,7 @@ function seleccionarMascotaJugador() {
 }
 
 function seleccionarToypon(mascotaJugador) {
-    fetch(`http://localhost:8080/toypon/${jugadorId}`, {
+    fetch(`http://192.168.0.143:8080/toypon/${jugadorId}`, {
         method: "post",
         headers: {
             "Content-Type": "application/json"
@@ -258,7 +257,7 @@ function secuenciaAtaques() {
 }
 
 function enviarAtaques() {
-    fetch(`http://localhost:8080/toypon/${jugadorId}/ataques`, {
+    fetch(`http://192.168.0.143:8080/toypon/${jugadorId}/ataques`, {
         method: "post",
         headers: {
             "Content-Type": "application/json"
@@ -271,7 +270,7 @@ function enviarAtaques() {
 }
 
 function obtenerAtaques() {
-    fetch(`http://localhost:8080/toypon/${enemigoId}/ataques`)
+    fetch(`http://192.168.0.143:8080/toypon/${enemigoId}/ataques`)
         .then(function (res) {
             if (res.ok) {
                 res.json()
@@ -401,7 +400,7 @@ function pintarCanvas() {
 }
 
 function enviarPosicion(x, y) {
-    fetch(`http://localhost:8080/toypon/${jugadorId}/posicion`, {
+    fetch(`http://192.168.0.143:8080/toypon/${jugadorId}/posicion`, {
         method: "post",
         headers: {
             "Content-Type": "application/json"
@@ -494,32 +493,7 @@ function iniciarMapa() {
 
     window.addEventListener("keydown", teclas)
 
-    window.addEventListener("keyup", detenerMovimiento)
-
-    const botonArriba = document.getElementById("mover-arriba");
-    const botonIzquierda = document.getElementById("mover-izquierda");
-    const botonAbajo = document.getElementById("mover-abajo");
-    const botonDerecha = document.getElementById("mover-derecha");
-    
-    if (botonArriba) {
-        botonArriba.addEventListener("touchstart", () => moverArriba(), false);
-        botonArriba.addEventListener("touchend", detenerMovimiento, false);
-    }
-    
-    if (botonIzquierda) {
-        botonIzquierda.addEventListener("touchstart", () => moverIzquierda(), false);
-        botonIzquierda.addEventListener("touchend", detenerMovimiento, false);
-    }
-    
-    if (botonAbajo) {
-        botonAbajo.addEventListener("touchstart", () => moverAbajo(), false);
-        botonAbajo.addEventListener("touchend", detenerMovimiento, false);
-    }
-    
-    if (botonDerecha) {
-        botonDerecha.addEventListener("touchstart", () => moverDerecha(), false);
-        botonDerecha.addEventListener("touchend", detenerMovimiento, false);
-    }  
+    window.addEventListener("keyup", detenerMovimiento) 
 }
 
 function objetoMascota() {

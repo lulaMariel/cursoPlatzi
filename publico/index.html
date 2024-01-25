@@ -24,11 +24,11 @@
                 <h2 id="sub-mapa2" class="subtitulo">Toypon!</h2>
             </div>
             <canvas id="mapa"></canvas>
-            <button id="mover-arriba" onmouseup="detenerMovimiento()" onmousedown="moverArriba()">⬆</button>
+            <button onmouseup="detenerMovimiento()" ontouchend="detenerMovimiento()" onmousedown="moverArriba()" ontouchstart="moverArriba()">⬆</button>
             <div>
-                <button id="mover-izquierda" onmouseup="detenerMovimiento()" onmousedown="moverIzquierda()">⬅</button>
-                <button id="mover-abajo" onmouseup="detenerMovimiento()" onmousedown="moverAbajo()">⬇</button>
-                <button id="mover-derecha" onmouseup="detenerMovimiento()" onmousedown="moverDerecha()">➡</button>
+                <button onmouseup="detenerMovimiento()" ontouchend="detenerMovimiento()" onmousedown="moverIzquierda()" ontouchstart = "moverIzquierda()">⬅</button>
+                <button onmouseup="detenerMovimiento()" ontouchend="detenerMovimiento()" onmousedown="moverAbajo()" ontouchstart="moverAbajo()">⬇</button>
+                <button onmouseup="detenerMovimiento()" ontouchend="detenerMovimiento()" onmousedown="moverDerecha()" ontouchstart="moverDerecha()">➡</button>
             </div>
         </section>
 
@@ -77,6 +77,6 @@
                 </div>
             </div>
         </section>
-        <script src="js/toypon.js"></script>
+        <script src="toypon.js"></script>
     </body>
 </html>
