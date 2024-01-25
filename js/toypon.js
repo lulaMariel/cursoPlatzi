@@ -23,6 +23,7 @@ const seccionVerMapa = document.getElementById("ver-mapa")
 const mapa = document.getElementById("mapa")
 
 let jugadorId = null
+let enemigoId = null
 let toypones = []
 let toyponesEnemigos = []
 let ataqueJugador = []
@@ -249,7 +250,21 @@ function secuenciaAtaques() {
                 boton.style.background = "#3C0753"
                 boton.disabled = true
             }
-            ataqueAleatorioEnemigo()
+            if (ataqueJugador.length == 5) {
+                enviarAtaques()
+            }
+        })
+    })
+}
+
+function enviarAtaques() {
+    fetch(`http://localhost:8080/toypon/${jugadorId}/ataques`, {
+        method: "post",
+        headers: {
+            "Content-Type": "application/json"
+        },
+        body: JSON.stringify({
+            ataques: ataqueJugador
         })
     })
 }
@@ -363,12 +378,8 @@ function pintarCanvas() {
 
     toyponesEnemigos.forEach(function (toypon) {
         toypon.pintarToypon()
+        revisarColision(toypon)
     })
-    if(objetoMascotaJugador.velocidadX !== 0 || objetoMascotaJugador.velocidadY !== 0) {
-        revisarColision(woodyEnemigo)
-        revisarColision(buzzEnemigo)
-        revisarColision(rexEnemigo)
-    }
 }
 
 function enviarPosicion(x, y) {
@@ -391,11 +402,11 @@ function enviarPosicion(x, y) {
                         let toyponEnemigo = null
                         const toyponNombre = enemigo.toypon.nombre || ""
                         if (toyponNombre == "Woody") {
-                            toyponEnemigo = new Toypones("Woody", "fotos/woody.png", 5, "fotos/carawoody.png")
+                            toyponEnemigo = new Toypones("Woody", "fotos/woody.png", 5, "fotos/carawoody.png", enemigo.id)
                         } else if (toyponNombre == "Buzz") {
-                            toyponEnemigo = new Toypones("Buzz", "fotos/buzz.png", 5, "fotos/carabuzz.png")
+                            toyponEnemigo = new Toypones("Buzz", "fotos/buzz.png", 5, "fotos/carabuzz.png", enemigo.id)
                         } else if (toyponNombre == "Rex") {
-                            toyponEnemigo = new Toypones("Rex", "fotos/rex.png", 5, "fotos/cararex.png")
+                            toyponEnemigo = new Toypones("Rex", "fotos/rex.png", 5, "fotos/cararex.png", enemigo.id)
                         }
                         toyponEnemigo.x = enemigo.x
                         toyponEnemigo.y = enemigo.y
@@ -522,6 +533,8 @@ function revisarColision(enemigo) {
 
     detenerMovimiento()
     clearInterval(intervalo)
+
+    enemigoId = enemigo.id
     seccionSelecionarAtaque.style.display = "flex"
     seccionVerMapa.style.display = "none"
     seleccionarMascotaEnemigo(enemigo)
