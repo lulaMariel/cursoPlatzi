@@ -193,6 +193,20 @@ input:checked + label {
     margin: 5px
 }
 
+.sub-mapa {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+#sub-mapa1 {
+    margin-bottom: 0px;
+}
+
+#sub-mapa2 {
+    margin-top: 0px;
+}
+
 @media (max-width: 500px) {
     .tarjetas, .tarjetas-ataques {
         flex-direction: column;
@@ -218,20 +232,6 @@ input:checked + label {
     #mapa {
         width: 340px;
         height: 240px;
-    }
-
-    .sub-mapa {
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-    }
-
-    #sub-mapa1 {
-        margin-bottom: 0px;
-    }
-
-    #sub-mapa2 {
-        margin-top: 0px;
     }
 
     #ver-mapa button {
